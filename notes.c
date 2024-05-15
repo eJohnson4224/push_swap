@@ -41,3 +41,13 @@ void push_swap(int  *stack_a)
 {
 
 }
+										use ft_atoi
+Take in inputs (can be 12 32 23 2 4 or "12 32 23 2 4"). Assign directly to stack_a.
+Bug cases for -- and "asdf".
+
+Logic
+	load all numbers into stack_a
+
+	push 2 top numbers into stack_b
+	rotate stack_a until lowest in 1st position (tuo: 1 or 0 can add for lowest possibillity in range)
+	organize all numbers up to 3 into stack_b by ____?
