@@ -1,30 +1,6 @@
 #include "push_swap.h"
 
-int	*get_input(int ac, char *av[])
-{
-	int		stack_size;
-	int		*stack;
-	long	temp;
-
-	//insert conditionals
-	if (ac <= 2)
-		return (NULL);
-	//insert conditionals
-	stack_size = ac - 1;
-	stack = malloc(stack_size * sizeof(int));
-	temp = 0;
-	if (!(ft_is_digit_digit(*++av)))
-		return (NULL);
-	while (*++av)
-	{
-		temp = ft_atol(*av);
-		if (temp > 2147483647 || temp < -2147483648)
-			return (NULL);
-		*stack++ = ft_atoi(*av);
-	}
-	return (stack);
-}
-evolution of the return variable
+/* evolution of the return variable
 			_
 			|av"12" "13" "4" || av"12 13 4"
 			|  	|                  |
@@ -40,55 +16,75 @@ swap prep	|	node_t stack_a; node_t stack_b;
 
 
 
-Each move will be printed directly on to the terminal
+Each move will be printed directly on to the terminal */
 
 if (ac == 2)
 
-t_list	*get_input_quote(int ac, char *av[])
+int	pkg_digit_bool(char	**package)
 {
 	int		i;
 	int		stack_size;
-	int		*stack;
-	char	**stack_package;
 	char	zero_nine;
-	long	temp;
-	t_list *head_a;
 
 	i = 0;
 	stack_size = 0;
-	*head = NULL;
-	zero_nine = NULL;
-	stack_package = ft_split(av[1], ' ');
-	//note: need to go through each char node and individual char
-	//just need a function to simultaneously make stack_size and 
-	// validate node at i as >= "0" and <= "9"
-	ft_atol(stack_package[stack_size]);
-	while (stack_package[stack_size])
+	zero_nine = '0';
+	while (package[stack_size])
 	{
-		while (stack_package[stack_size][i])
+		while (package[stack_size][i])
 		{
-			zero_nine = stack_package[stack_size][i];
+			zero_nine = package[stack_size][i];
 			if (!ft_is_digit(zero_nine))
-				return NULL;
+				return (0);
 			i++;
 		}
 		stack_size++;
 	}
+	return (stack_size);
+}
 
+t_list	*package_to_stack(char	**stack_package)
+{
+	long	temp;
+	t_list	*head_temp;
+	t_list	*node;
+	t_list	*head;
 
-	stack = ft_lstnew(NULL);
-	//Could instead just make stack a appropriatly and assign it
-	//Consider the idea of working with just ascii values since 
-	//the input will probably alwalys be taken as such
-	i = 0;
 	temp = 0;
+	*head_temp = NULL;
+	head = ft_lstnew(0);
+	node = head;
 	while (*stack_package)
 	{
 		temp = atol(*stack_package);
 		if (!(temp > INT_MIN && temp < INT_MAX))
-			return NULL;
-			t_list = temp;
+			return (NULL);
+		node->content = temp;
+		head_temp = ft_lstnew(0);
+		ft_lstadd_back(&node, head_temp);
+		head_temp = head;
+		node = head->next;
+		node->prev = head_temp;
 		stack_package++;
 	}
-	
+	return (head);
+}
+
+t_list	*get_input_quote(int ac, char *av[])
+{
+	int		i;
+	int		*stack;
+	char	**stack_package;
+	char	zero_nine;
+	t_list	*head_a;
+
+	i = 0;
+	*head_a = NULL;
+	zero_nine = NULL;
+	stack_package = ft_split(av[1], ' ');
+	// validate node at i as >= "0" and <= "9"
+	if (!(pkg_digit_bool(stack_package)))
+		return (NULL);
+	head_a = package_to_stack(stack_package);
+	return (head_a);
 }
